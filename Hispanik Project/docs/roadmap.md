@@ -182,7 +182,7 @@ Vercel removes infrastructure as a variable.
 
 ---
 
-### Cursor + AI Assistance
+### Antigravity + AI Assistance
 **Phase One:**
 - Accelerates file creation
 - Reduces setup friction
