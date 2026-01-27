@@ -77,6 +77,11 @@ When performing tasks, the agent should utilize these external resources for enh
 1. **Never break Phase 1 scope**: If a requested feature is not one of the 3 pages or relies on Auth/DB, **stop and ask**.
 2. **Design First**: Before implementing, consult the design skills/knowledge bases to ensure the visual output is "Wow" quality.
 3. **Verify Preview**: Ensure changes work in both standard view (published) and preview mode (drafts).
+4. **Next.js 15 Async Patterns**:
+   - `draftMode()` is async in Next.js 15.
+   - **Rule**: `draftMode()` must be unwrapped using `React.use()` inside server-only utility files (e.g., `sanity.client.ts`).
+   - **Rule**: Pages should NOT handle `draftMode()` directly or have async client creation logic. They should consume synchronous helpers like `isDraftModeEnabled()`.
+   - **Rule**: Pages using preview mode must export `export const dynamic = 'force-dynamic'` to guarantee freshness.
 
 ---
 
