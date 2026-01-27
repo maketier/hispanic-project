@@ -1,10 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-// Note: This file uses React's `use()` for Server Components which is valid
-// but triggers ESLint's hooks rules designed for Client Components.
-
 import { createClient, type SanityClient } from 'next-sanity'
 import { draftMode } from 'next/headers'
-import { use } from 'react'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -22,13 +17,13 @@ const publishedClient = createClient({
   perspective: 'published',
 })
 
-export function isDraftModeEnabled(): boolean {
-  const draft = use(draftMode())
+export async function isDraftModeEnabled(): Promise<boolean> {
+  const draft = await draftMode()
   return draft.isEnabled
 }
 
-export function getClient(): SanityClient {
-  if (isDraftModeEnabled()) {
+export function getClient(isDraft: boolean): SanityClient {
+  if (isDraft) {
     const token = process.env.SANITY_API_READ_TOKEN
 
     if (!token) {
@@ -52,7 +47,12 @@ export function getClient(): SanityClient {
   return publishedClient
 }
 
-export async function sanityFetch<T>(query: string, params = {}): Promise<T> {
-  const client = getClient()
-  return client.fetch<T>(query, params)
+export async function sanityFetch<T>(
+  query: string,
+  params: Record<string, unknown> = {}
+): Promise<{ data: T | null; isDraft: boolean }> {
+  const isDraft = await isDraftModeEnabled()
+  const client = getClient(isDraft)
+  const data = await client.fetch<T | null>(query, params)
+  return { data, isDraft }
 }

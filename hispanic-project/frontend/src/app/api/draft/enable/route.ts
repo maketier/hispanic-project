@@ -1,3 +1,5 @@
+export const runtime = 'nodejs'
+
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'

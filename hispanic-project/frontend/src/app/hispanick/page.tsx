@@ -1,13 +1,12 @@
 export const dynamic = 'force-dynamic'
 
 import { PortableText } from '@portabletext/react'
-import { isDraftModeEnabled, sanityFetch } from '@/lib/sanity.client'
+import { sanityFetch } from '@/lib/sanity.client'
 import { hispanickQuery } from '@/lib/sanity.queries'
 import type { PageData } from '@/lib/sanity.types'
 
 export default async function HispanickPage() {
-  const isDraft = isDraftModeEnabled()
-  const data = await sanityFetch<PageData | null>(hispanickQuery)
+  const { data, isDraft } = await sanityFetch<PageData>(hispanickQuery)
 
   if (!data) {
     return (

@@ -1,13 +1,12 @@
 export const dynamic = 'force-dynamic'
 
 import { PortableText } from '@portabletext/react'
-import { isDraftModeEnabled, sanityFetch } from '@/lib/sanity.client'
+import { sanityFetch } from '@/lib/sanity.client'
 import { homepageQuery } from '@/lib/sanity.queries'
 import type { PageData } from '@/lib/sanity.types'
 
 export default async function Home() {
-  const isDraft = isDraftModeEnabled()
-  const data = await sanityFetch<PageData | null>(homepageQuery)
+  const { data, isDraft } = await sanityFetch<PageData>(homepageQuery)
 
   if (!data) {
     return (
