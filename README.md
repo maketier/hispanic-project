@@ -1,2 +1,0 @@
-# hispanic-project
-Hispanic Project
