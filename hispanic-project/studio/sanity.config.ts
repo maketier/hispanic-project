@@ -14,17 +14,23 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
-    // Filter out singleton types from initial document value templates
+    // Block singleton types from "Create new document" menu
     templates: (templates) =>
       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
 
   document: {
-    // Hide 'duplicate' and 'delete' actions for singletons
-    actions: (input, context) =>
-      singletonTypes.has(context.schemaType)
-        ? input.filter(({ action }) => action !== 'duplicate' && action !== 'delete')
-        : input,
+    // Filter document actions for singleton types
+    // Uses action.action which is the stable property in Sanity v3
+    actions: (input, context) => {
+      if (singletonTypes.has(context.schemaType)) {
+        return input.filter((action) => {
+          // action.action is the stable identifier (e.g., 'duplicate', 'delete')
+          const actionId = action.action
+          return actionId !== 'duplicate' && actionId !== 'delete'
+        })
+      }
+      return input
+    },
   },
 })
-
