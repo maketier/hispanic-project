@@ -14,17 +14,17 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    // Filter out singleton types from initial document value templates
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
 
   document: {
+    // Hide 'duplicate' and 'delete' actions for singletons
     actions: (input, context) =>
       singletonTypes.has(context.schemaType)
-        ? input.filter(
-            (action) =>
-              action?.name && !['create', 'duplicate'].includes(action.name)
-          )
+        ? input.filter(({ action }) => action !== 'duplicate' && action !== 'delete')
         : input,
-    newDocumentOptions: (prev, context) =>
-      singletonTypes.has(context.schemaType) ? [] : prev,
   },
 })
+
