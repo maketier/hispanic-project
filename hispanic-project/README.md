@@ -7,7 +7,7 @@ A managed, CMS-driven marketing website for **Headroom Systems** and the **Hispa
 | Environment | URL |
 |-------------|-----|
 | **Production** | [hispanic-project.vercel.app](https://hispanic-project.vercel.app) |
-| **CMS (Studio)** | *(Deploy pending — see Step 11)* |
+| **CMS (Studio)** | [hispanic.sanity.studio](https://hispanic.sanity.studio) |
 
 ## ✅ Phase 1 Status: COMPLETE
 
