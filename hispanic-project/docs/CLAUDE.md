@@ -20,9 +20,9 @@ This file serves as the **authoritative source of truth** for AI agents (and hum
   1. **Homepage** (Headroom Systems)
   2. **Ecosystem / About** (Headroom Systems)
   3. **Label Page** (Hispanic.k)
-- **Rendering**: SSG (Static Site Generation) / ISR (Incremental Static Regeneration) ONLY.
-  - **Why**: Maximum SEO performance and robustness.
-  - **Rule**: Do not use dynamic server rendering for page routes.
+- **Rendering**: SSG / ISR for production; `force-dynamic` for preview freshness.
+  - **Why**: Maximum SEO performance while ensuring drafts are never cached.
+  - **Rule**: Preview mode pages use `export const dynamic = 'force-dynamic'`.
 - **Excluded Features**:
   - No Authentication
   - No Database (Postgres/SQL)
@@ -33,7 +33,7 @@ This file serves as the **authoritative source of truth** for AI agents (and hum
 - **Production**: The live site must ONLY show published content.
 - **Deployment**:
   - `testing` branch → Preview deployments
-  - `production` branch → Production deployments (Protected, PR required)
+  - `main` branch → Production deployments (Protected, PR required)
 
 ---
 
@@ -79,14 +79,20 @@ When performing tasks, the agent should utilize these external resources for enh
 3. **Verify Preview**: Ensure changes work in both standard view (published) and preview mode (drafts).
 4. **Next.js 15 Async Patterns**:
    - `draftMode()` is async in Next.js 15.
-   - **Rule**: `draftMode()` must be unwrapped using `React.use()` inside server-only utility files (e.g., `sanity.client.ts`).
-   - **Rule**: Pages should NOT handle `draftMode()` directly or have async client creation logic. They should consume synchronous helpers like `isDraftModeEnabled()`.
+   - **Rule**: Use `await draftMode()` in async server functions (e.g., `sanityFetch`).
+   - **Rule**: Pages should NOT call `draftMode()` directly. Use centralized helpers like `sanityFetch()` which returns `{ data, isDraft }`.
    - **Rule**: Pages using preview mode must export `export const dynamic = 'force-dynamic'` to guarantee freshness.
+   - **Rule**: Draft API routes must use `export const runtime = 'nodejs'`.
 
 ---
 
 ## 4. Commands
+
+### Frontend (`frontend/`)
 - `npm run dev`: Start development server
 - `npm run build`: Build for production
 - `npm run start`: Start production server
-- `npx sanity dev`: Start Sanity Studio
+
+### Studio (`studio/`)
+- `npx sanity dev`: Start Sanity Studio locally
+- `npx sanity deploy`: Deploy Studio to Sanity hosting
