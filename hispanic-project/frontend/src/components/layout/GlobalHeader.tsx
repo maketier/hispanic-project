@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { MobileNavClient } from './MobileNavClient'
 
 // Static navigation links (explicit exception per doctrine)
 const navLinks = [
@@ -19,19 +20,25 @@ export function GlobalHeader() {
           Headroom
         </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-8">
+        {/* Desktop Navigation */}
+        <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-sans text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="group relative font-sans text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
               </Link>
             </li>
           ))}
         </ul>
+
+        {/* Mobile Navigation (Client Island) */}
+        <div className="md:hidden">
+          <MobileNavClient navLinks={navLinks} />
+        </div>
       </nav>
     </header>
   )

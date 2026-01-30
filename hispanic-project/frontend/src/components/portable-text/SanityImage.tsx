@@ -1,12 +1,9 @@
 import Image from 'next/image'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import type { SanityImageSource } from '@sanity/image-url'
+import { sanityConfig } from '@/lib/sanity.config'
 
-// Initialize image builder with project config
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
-
-const builder = imageUrlBuilder({ projectId, dataset })
+const builder = createImageUrlBuilder(sanityConfig)
 
 function urlFor(source: SanityImageSource) {
   return builder.image(source)

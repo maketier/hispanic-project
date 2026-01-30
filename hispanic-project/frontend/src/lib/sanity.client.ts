@@ -1,18 +1,9 @@
 import { createClient, type SanityClient } from 'next-sanity'
 import { draftMode } from 'next/headers'
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
-const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION
-
-if (!projectId || !dataset || !apiVersion) {
-  throw new Error('Missing Sanity environment variables')
-}
+import { sanityConfig } from '@/lib/sanity.config'
 
 const publishedClient = createClient({
-  projectId,
-  dataset,
-  apiVersion,
+  ...sanityConfig,
   useCdn: true,
   perspective: 'published',
 })
@@ -34,9 +25,7 @@ export function getClient(isDraft: boolean): SanityClient {
     }
 
     return createClient({
-      projectId,
-      dataset,
-      apiVersion,
+      ...sanityConfig,
       token,
       useCdn: false,
       perspective: 'previewDrafts',
