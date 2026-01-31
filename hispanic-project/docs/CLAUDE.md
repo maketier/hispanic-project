@@ -48,11 +48,37 @@ When performing tasks, the agent should utilize these external resources for enh
 ### Frontend Design Excellence
 - **Resource**: [Claude Code Frontend Design Skill](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design)
 - **Resource**: [Anthropics Frontend Design Skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design)
-- **Resource**: [NextLevelBuilder UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.opencode/skills/ui-ux-pro-max)
+- ~~NextLevelBuilder UI/UX Pro Max~~ *(Removed 2026-01-31: 404)*
 - **Usage**: Use these skills to generate production-ready code with:
   - **Aesthetics**: Bold choices, distinctive typography, high-impact visuals.
   - **Interactivity**: Smooth, context-aware animations and micro-interactions.
   - **Quality**: Production-grade implementation logic.
+
+### Maketier Local Skills
+- **Location**: `.claude/skills/`
+- **Skills Available**:
+  - `maketier-design-doctrine` — UI/styling enforcement
+  - `maketier-sanity-governance` — CMS patterns
+  - `maketier-scope-contract` — Scope enforcement
+  - `maketier-deploy-governance` — Deployment checklist
+- **Invocation**: See `.claude/skills/README.md` for trigger conventions
+
+---
+
+## 2.5 Brand Injection / Theming
+
+### Where to Change Branding
+- `docs/BRAND_PROFILE.md` — Brand inputs (fonts, colors, radii)
+- `frontend/src/styles/brand.css` — Semantic token values
+
+### Rules
+1. Never restyle templates; adjust token mapping only
+2. Components consume semantic tokens, never literal colors
+3. Brand changes = edit BRAND_PROFILE + brand.css, not components
+
+### Governance Check
+- Run: `npm run governance:check` (in frontend/)
+- Fails if literal colors found in components
 
 ---
 

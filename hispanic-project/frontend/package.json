@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "governance:check": "bash ../scripts/governance-check.sh"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.2",

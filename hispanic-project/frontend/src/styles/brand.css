@@ -1,0 +1,67 @@
+/**
+ * Brand Pack: Colors/Radii/Shadows
+ * 
+ * This is the SINGLE SOURCE OF TRUTH for theme values.
+ * Fonts are loaded separately via frontend/src/brand/fonts.ts
+ * 
+ * To rebrand:
+ * 1. Update values in this file
+ * 2. Components update automatically (no rewrites)
+ */
+
+:root {
+   /* =========================
+     BACKGROUNDS
+     ========================= */
+   --bg-primary: #0a0a0a;
+   --bg-elevated: #121212;
+
+   /* =========================
+     FOREGROUNDS
+     ========================= */
+   --fg-primary: #ededed;
+   --fg-muted: #a1a1aa;
+
+   /* =========================
+     ACCENT
+     ========================= */
+   --accent: #D4AF37;
+   --accent-hover: #E5C04B;
+   --accent-foreground: #000000;
+
+   /* =========================
+     NEUTRAL
+     ========================= */
+   --border: #27272a;
+   --input: #27272a;
+   --ring: #D4AF37;
+
+   /* =========================
+     SECONDARY
+     ========================= */
+   --secondary: #27272a;
+   --secondary-foreground: #e4e4e7;
+
+   /* =========================
+     MUTED
+     ========================= */
+   --muted: #52525b;
+   --muted-foreground: #a1a1aa;
+
+   /* =========================
+     RADII
+     ========================= */
+   --radius-sm: 0.25rem;
+   --radius-md: 0.375rem;
+   --radius-card: 0.5rem;
+   --radius-lg: 0.75rem;
+   --radius-full: 9999px;
+
+   /* =========================
+     SHADOWS
+     ========================= */
+   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+   --shadow-elevated: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+   --shadow-accent: 0 4px 14px 0 rgb(212 175 55 / 0.3);
+}

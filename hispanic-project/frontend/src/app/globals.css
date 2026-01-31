@@ -1,71 +1,33 @@
 @import "tailwindcss";
-
-:root {
-  /* Premium Dark Theme Palette */
-  --background: #0a0a0a;
-  /* Rich Black */
-  --foreground: #ededed;
-  /* Off-white for text */
-
-  /* Brand Colors */
-  --card: #121212;
-  --card-foreground: #ffffff;
-
-  --primary: #D4AF37;
-  /* Metallic Gold */
-  --primary-foreground: #000000;
-
-  --secondary: #27272a;
-  /* Zinc 800 */
-  --secondary-foreground: #e4e4e7;
-
-  --muted: #52525b;
-  /* Zinc 600 */
-  --muted-foreground: #a1a1aa;
-
-  --accent: #D4AF37;
-  --accent-foreground: #000000;
-
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #D4AF37;
-}
+@import "../styles/brand.css";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
+  /* Colors - mapped from brand.css semantic vars */
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--fg-primary);
+  --color-card: var(--bg-elevated);
+  --color-card-foreground: var(--fg-primary);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Typography Scale */
-  --font-inter: var(--font-inter);
-  --font-playfair: var(--font-playfair);
-
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  /* Fonts - from frontend/src/brand/fonts.ts via next/font on <html> */
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -76,7 +38,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-display), serif;
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.02em;
